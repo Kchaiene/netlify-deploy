@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+
 
 function App() {
+
+  const onLambdaCall = async e => {
+    try {
+      const resp = await fetch("/api/lambda");
+      console.log("Lambda Function Call", resp);
+      const data = await resp.json();
+      console.log("Lambda Function Call", data);
+    } catch (e) {
+      console.log("Error ==. Lambda Function Call", e.message);
+    }
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>App Netlify Deploy</h1>
+      <div>
+        <button onClick={onLambdaCall}>Lamda Function Call</button>
+      </div>
     </div>
   );
 }
